@@ -1,0 +1,9 @@
+---
+applications:
+ - name: ac-rental-mgmt-app
+   memory: 2G
+   instances: 1
+   path: target/linksharing-0.1.war
+   buildpack: java_buildpack
+   services:
+     - sharehub
