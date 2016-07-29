@@ -2,6 +2,7 @@ package com.ttnd.linksharing
 
 import com.ttnd.linksharing.DTO.EmailDTO
 import grails.test.mixin.TestFor
+import org.codehaus.groovy.grails.context.support.PluginAwareResourceBundleMessageSource
 import org.codehaus.groovy.tools.shell.util.MessageSource
 import spock.lang.Specification
 
@@ -18,14 +19,19 @@ class EmailServiceSpec extends Specification {
     def "send Unread Items mail To user"()
     {
         given:
-        def mockedMessageSource=Mock(MessageSource)
+        def mockedMessageSource=Mock(PluginAwareResourceBundleMessageSource)
+        mockedMessageSource.metaClass.getMessage={String code, Object[] args, Locale locale->
+         return "This is a message"
+        }
         service.messageSource=mockedMessageSource
+        service.metaClass.sendMail={}
 
         when:
-       EmailDTO emailDTO= service.sendUnreadResourcesEmail(new User(),[new LinkResource()])
+        service.sendUnreadResourcesEmail(new User(),[new LinkResource()])
         then:
-        emailDTO!=Null
+        1*service.sendMail(new EmailDTO())
 
     }
+
 
 }

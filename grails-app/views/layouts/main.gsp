@@ -6,10 +6,10 @@
     <title>first bootstrap program>
     <g:layoutTitle default="Grails"/>
     </title>
-    <meta property="og:url"           content="http://localhost:8080/" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="LinkSharing" />
-    <meta property="og:description"   content="Your description" />
+    <meta property="og:url" content="http://localhost:8080/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="LinkSharing"/>
+    <meta property="og:description" content="Your description"/>
     %{--<meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />--}%
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,18 +25,21 @@
 
 <body>
 <script>
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
         FB.init({
-            appId      : '880681558707028',
-            xfbml      : true,
-            version    : 'v2.5'
+            appId: '880681558707028',
+            xfbml: true,
+            version: 'v2.5'
         });
     };
 
-    (function(d, s, id){
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -98,9 +101,9 @@
             </button>
         </li>
         %{--<li>--}%
-            %{--<button type="button" data-toggle="modal" data-target="#myModal5">--}%
-                %{--<span class="glyphicon glyphicon-paperclip" style="font-size:20px"></span>--}%
-            %{--</button>--}%
+        %{--<button type="button" data-toggle="modal" data-target="#myModal5">--}%
+        %{--<span class="glyphicon glyphicon-paperclip" style="font-size:20px"></span>--}%
+        %{--</button>--}%
         %{--</li>--}%
 
         <span class="glyphicon glyphicon-user" style="font-size:23px"></span>
@@ -112,17 +115,17 @@
             <ul class="dropdown-menu">
                 <li><g:link controller="user" action="privateProfile"
                             params="[id: session.user.id]">profile</g:link></li>
-                %{--<li><a href="#">user</a></li>--}%
+                <li><a href="#">user</a></li>
                 <li><g:link controller="user" action="list">user</g:link></li>
                 <g:link action="logout" controller="login">Logout</g:link>
             </ul>
         </div>
-    </ul>
-    </li>
+     </ul>
+     </li>
 
-    </ul>
-    </form>
-    </div>
+     </ul>
+     </form>
+     </div>
     </nav>
     </div>
     <g:render template="/topic/createTopic"/>

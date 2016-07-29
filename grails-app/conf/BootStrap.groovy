@@ -182,12 +182,10 @@ class BootStrap {
 
 
     List<ReadingItem> createReadingItems() {
-        println("+++++++++++++++++++++++++++++++++enter newwwwwwwwwwwwwww111111111")
         List<User> users = User.list()
         List<Topic> topics = Topic.list()
         List<ReadingItem> readingItems = []
         if (!ReadingItem.count) {
-            println("+++++++++++++++++++++++++++++++++enter newwwwwwwwwwwwwww")
         }
         users.each { user ->
             println("+++++++++++++++++++++++++++++++${user.properties}")
@@ -259,7 +257,6 @@ class BootStrap {
 //        }
         }
     }
-
     def destroy = {
     }
 }

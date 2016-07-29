@@ -14,7 +14,6 @@ grails.config.locations =
 //https://drive.google.com/a/tothenew.com/file/d/0B3z1Eq2lcmE0dHRqcTJtOEZNSTA/view?usp=sharing
 
 grails.project.groupId = "com.ttnd.linksharing" // change this to alter the default package name and Maven publishing destination
-println "changing"
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [ // the first one is the default format
