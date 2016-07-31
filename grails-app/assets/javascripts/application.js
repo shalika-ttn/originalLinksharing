@@ -82,21 +82,18 @@ function unsubscribe(id) {
         }
     })
 }
-var inc = -10;
+var inc = 0;
 function myFunction() {
-    //alert("hello");
-    var y = $(".inboxUser").scrollTop();
-    console.log(y);
-    if ((y + 13.4) >= $(".inboxUser").height()) {
-        //alert("hello");
-
+    var inboxUser=$(".inboxUser");
+    var y =inboxUser.scrollTop();
+    if ((y + 15) >= inboxUser.height()) {
         inc = inc + 10;
-        console.log(inc)
+        console.log(inc);
         $.ajax({
             url: '/readingItems/inboxUser',
             data: {off: inc},
             success: function (data) {
-                $(".inboxBody").append(data)
+                $(".inboxBody").append(data);
                 //alert("sucesfull")
             },
             error: function (data) {

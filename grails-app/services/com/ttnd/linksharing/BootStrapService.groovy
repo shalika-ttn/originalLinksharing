@@ -17,7 +17,7 @@ class BootStrapService {
         List<Topic> topics = createTopics(users)
         List<Resource> resources = createResources(topics)
         subscribeTopics(topics, users)
-        List<ReadingItem> readingItems = createReadingItems()
+         createReadingItems()
         List<ResourceRating> resourceRatings = createResourceRating(users)
     }
 
@@ -27,7 +27,6 @@ class BootStrapService {
             if (User.count == 0) {
                 User user1 = new User(firstName: "shalika", lastName: "singhal", email: "shalika.singhal@tothenew.com",
                         password: Constant.DEFAULT_PASSWD, userName: "sha", admin: true, active: true, confirmPassword: "abcd10");
-                // println "=++++++++++++++++++++++++++++++++++++ ${messageSource.getMessage('com.ttnd.linksharing.User.email.nullable', null)}"
 
                 User user2 = new User(firstName: "saloni", lastName: "sharma", email: "saloni.sharma@tothenew.com",
                         password: Constant.DEFAULT_PASSWD, userName: "sal",
@@ -148,25 +147,24 @@ class BootStrapService {
         }
         // Resouces which are not created by the topic subscribed by user should have that resource in their reading item
 
-        List<ReadingItem> createReadingItems() {
+       void createReadingItems() {
             List<User> users = User.list()
             List<Topic> topics = Topic.list()
             List<ReadingItem> readingItems = []
             if (!ReadingItem.count) {
-            }
-            users.each { user ->
-                println("+++++++++++++++++++++++++++++++${user.properties}")
-                Resource.findAllByCreatedByNotEqual(user).each { resource ->
-                    ReadingItem readingItem = new ReadingItem(user: user, resource: resource, isRead: false)
-                    if (readingItem.save(flush: true)) {
-                        readingItems.add(readingItem)
-                        user.addToReadingItems(readingItem)
-                        log.info "${readingItem} saved successfully"
-                        println("+++++++++++++++++++++++++++++++++enter 2")
 
-                    } else
-                        log.error "Error saving ${readingItem.errors.allErrors}"
+                users.each { user ->
+                    Resource.findAllByCreatedByNotEqual(user).each { resource ->
+                        ReadingItem readingItem = new ReadingItem(user: user, resource: resource, isRead: false)
+                        if (readingItem.save(flush: true)) {
+                            readingItems.add(readingItem)
+                            user.addToReadingItems(readingItem)
+                            log.info "${readingItem} saved successfully"
 
+                        } else
+                            log.error "Error saving ${readingItem.errors.allErrors}"
+
+                    }
                 }
             }
         }
@@ -203,12 +201,9 @@ class BootStrapService {
             if (!Subscription.count) {
 
                 users.each { User user ->
-
-
                     topic2 = Topic.findAllByCreatedByNotInList([user])
                     println "***************here ${topic2}"
                     topic2.each {
-
                         Subscription subscription = new Subscription(topic: it, user: user, seriousness: Seriousness.VERY_SERIOUS)
                         if (subscription.save(flush: true))
                             log.info "subscription saved succesfully"
